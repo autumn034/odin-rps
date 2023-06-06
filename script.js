@@ -25,26 +25,26 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function game() {
-    let playerWin = 0;
-    let computerWin = 0;
+let playerWin = 0;
+let computerWin = 0;
+let buttons = [
+    document.querySelector('#rock'), 
+    document.querySelector('#paper'),
+    document.querySelector('#scissors')
+];
 
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("rock/paper/scissors");
+for (btn of buttons) {
+    btn.addEventListener('click', () => {
         let computerSelection = getComputerChoice();
-        let result = playRound(playerSelection, computerSelection);
-        alert(result);
-
+        let result = playRound(btn.value, computerSelection);
+        
         if (result.match(/win/i)) {
             playerWin++;
         } 
         else if (result.match(/lose/i)) {
             computerWin++;
         }
-    }
 
-    alert(`Player Wins: ${playerWin} | Computer Wins: ${computerWin}`)
+        document.querySelector('#results').innerHTML = result + `<br>Player Wins: ${playerWin} | Computer Wins: ${computerWin}`;
+    });
 }
-
-game();
-
